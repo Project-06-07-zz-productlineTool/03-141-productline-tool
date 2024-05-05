@@ -50,7 +50,7 @@
 #define RT_USING_DEVICE
 #define RT_USING_CONSOLE
 #define RT_CONSOLEBUF_SIZE 256
-#define RT_CONSOLE_DEVICE_NAME "uart1"
+#define RT_CONSOLE_DEVICE_NAME "vcom"
 /* end of Kernel Device Object */
 #define RT_VER_NUM 0x50002
 /* end of RT-Thread Kernel */
@@ -207,6 +207,8 @@
 
 /* tools packages */
 
+#define PKG_USING_VCONSOLE
+#define PKG_USING_VCONSOLE_LATEST_VERSION
 /* end of tools packages */
 
 /* system packages */
