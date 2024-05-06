@@ -160,18 +160,6 @@
 /* Wiced WiFi */
 
 /* end of Wiced WiFi */
-
-/* CYW43012 WiFi */
-
-/* end of CYW43012 WiFi */
-
-/* BL808 WiFi */
-
-/* end of BL808 WiFi */
-
-/* CYW43439 WiFi */
-
-/* end of CYW43439 WiFi */
 /* end of Wi-Fi */
 
 /* IoT Cloud */
@@ -203,6 +191,10 @@
 /* u8g2: a monochrome graphic library */
 
 /* end of u8g2: a monochrome graphic library */
+
+/* PainterEngine: A cross-platform graphics application framework written in C language */
+
+/* end of PainterEngine: A cross-platform graphics application framework written in C language */
 /* end of multimedia packages */
 
 /* tools packages */
@@ -232,33 +224,15 @@
 
 /* peripheral libraries and drivers */
 
-/* HAL & SDK Drivers */
-
-/* STM32 HAL & SDK Drivers */
-
-/* end of STM32 HAL & SDK Drivers */
 
 /* Kendryte SDK */
 
 /* end of Kendryte SDK */
-/* end of HAL & SDK Drivers */
-
-/* sensors drivers */
-
-/* end of sensors drivers */
-
-/* touch drivers */
-
-/* end of touch drivers */
 /* end of peripheral libraries and drivers */
 
 /* AI packages */
 
 /* end of AI packages */
-
-/* Signal Processing and Control Algorithm Packages */
-
-/* end of Signal Processing and Control Algorithm Packages */
 
 /* miscellaneous packages */
 
@@ -278,9 +252,9 @@
 /* Arduino libraries */
 
 
-/* Projects and Demos */
+/* Projects */
 
-/* end of Projects and Demos */
+/* end of Projects */
 
 /* Sensors */
 
@@ -302,15 +276,11 @@
 
 /* Communication */
 
-/* end of Communication */
-
 /* Device Control */
 
 /* end of Device Control */
 
 /* Other */
-
-/* end of Other */
 
 /* Signal IO */
 

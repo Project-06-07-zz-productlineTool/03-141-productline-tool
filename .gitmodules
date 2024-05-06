@@ -1,0 +1,3 @@
+[submodule "packages/vconsole"]
+	path = packages/vconsole
+	url = https://github.com/enkiller/vconsole.git
