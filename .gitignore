@@ -39,3 +39,4 @@ settings/
 # cubemx/*
 cubemx/Drivers/*
 cubemx/EWARM/*
+.settings/language.settings.xml

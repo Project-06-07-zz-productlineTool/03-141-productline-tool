@@ -66,7 +66,7 @@ static void MX_ADC1_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
-int main(void)
+__WEAK int main(void)
 {
   /* USER CODE BEGIN 1 */
 
