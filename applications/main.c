@@ -26,14 +26,7 @@ void change_shell(void)
 
 int main(void)
 {
-    int count = 1;
     change_shell();
-    while (count++)
-    {
-//        LOG_D("Hello RT-Thread!");
-//        rt_kprintf("this is rt_kprintf");
-        rt_thread_mdelay(1000);
-    }
 
     return RT_EOK;
 }

@@ -1,7 +1,17 @@
 [
  {
+  "path": "/packages/iot/freemodbus", 
+  "ver": "latest", 
+  "name": "FREEMODBUS"
+ }, 
+ {
   "path": "/packages/tools/vconsole", 
   "ver": "latest", 
   "name": "VCONSOLE"
+ }, 
+ {
+  "path": "/packages/misc/samples/peripheral_samples", 
+  "ver": "latest", 
+  "name": "PERIPHERAL_SAMPLES"
  }
 ]

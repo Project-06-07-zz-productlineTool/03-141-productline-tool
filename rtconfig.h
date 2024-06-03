@@ -151,6 +151,52 @@
 
 /* IoT - internet of things */
 
+#define PKG_USING_FREEMODBUS
+#define PKG_MODBUS_MASTER
+
+/* advanced configuration */
+
+#define RT_M_DISCRETE_INPUT_START 0
+#define RT_M_DISCRETE_INPUT_NDISCRETES 16
+#define RT_M_COIL_START 0
+#define RT_M_COIL_NCOILS 64
+#define RT_M_REG_INPUT_START 0
+#define RT_M_REG_INPUT_NREGS 100
+#define RT_M_REG_HOLDING_START 0
+#define RT_M_REG_HOLDING_NREGS 100
+#define RT_M_HD_RESERVE 0
+#define RT_M_IN_RESERVE 0
+#define RT_M_CO_RESERVE 0
+#define RT_M_DI_RESERVE 0
+/* end of advanced configuration */
+#define PKG_MODBUS_MASTER_RTU
+#define PKG_MODBUS_MASTER_SAMPLE
+#define MB_SAMPLE_TEST_SLAVE_ADDR 1
+#define MB_MASTER_USING_PORT_NUM 1
+#define MB_MASTER_USING_PORT_BAUDRATE 115200
+#define PKG_MODBUS_SLAVE
+
+/* advanced configuration */
+
+#define RT_S_DISCRETE_INPUT_START 0
+#define RT_S_DISCRETE_INPUT_NDISCRETES 16
+#define RT_S_COIL_START 0
+#define RT_S_COIL_NCOILS 64
+#define RT_S_REG_INPUT_START 0
+#define RT_S_REG_INPUT_NREGS 100
+#define RT_S_REG_HOLDING_START 0
+#define RT_S_REG_HOLDING_NREGS 100
+#define RT_S_HD_RESERVE 0
+#define RT_S_IN_RESERVE 0
+#define RT_S_CO_RESERVE 0
+#define RT_S_DI_RESERVE 0
+/* end of advanced configuration */
+#define PKG_MODBUS_SLAVE_RTU
+#define PKG_MODBUS_SLAVE_SAMPLE
+#define MB_SAMPLE_SLAVE_ADDR 1
+#define MB_SLAVE_USING_PORT_NUM 1
+#define MB_SLAVE_USING_PORT_BAUDRATE 115200
+#define PKG_USING_FREEMODBUS_LATEST_VERSION
 
 /* Wi-Fi */
 
@@ -243,6 +289,10 @@
 
 /* samples: kernel and components samples */
 
+#define PKG_USING_PERIPHERAL_SAMPLES
+#define PKG_USING_PERIPHERAL_SAMPLES_LATEST_VERSION
+#define PERIPHERAL_SAMPLES_USING_SERIAL
+#define PERIPHERAL_SAMPLES_USING_SERIAL_DMA
 /* end of samples: kernel and components samples */
 
 /* entertainment: terminal games and other interesting software packages */
