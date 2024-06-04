@@ -12,6 +12,8 @@
 
 #include "mb.h"
 #include "user_mb_app.h"
+#include "smt_adc_get.h"
+#include "smt_io_get.h"
 
 #ifdef PKG_MODBUS_SLAVE_SAMPLE
 #define SLAVE_ADDR      MB_SAMPLE_SLAVE_ADDR
@@ -32,6 +34,9 @@
 
 extern USHORT usSRegHoldBuf[S_REG_HOLDING_NREGS];
 
+#define SMT_ADC_NUM 6
+#define SMT_IO_NUM 5
+
 static void send_thread_entry(void *parameter)
 {
     USHORT         *usRegHoldingBuf;
@@ -43,7 +48,8 @@ static void send_thread_entry(void *parameter)
         /* Test Modbus Master */
         level = rt_hw_interrupt_disable();
 
-        usRegHoldingBuf[3] = (USHORT)(rt_tick_get() / 100);
+        smt_adc_get(usRegHoldingBuf,SMT_ADC_NUM);
+        smt_io_get(&usRegHoldingBuf[SMT_ADC_NUM],SMT_IO_NUM);
 
         rt_hw_interrupt_enable(level);
 

@@ -14,6 +14,8 @@
 #define DBG_LVL DBG_LOG
 #include <rtdbg.h>
 #include "freemodbus_slave.h"
+#include "smt_adc_get.h"
+#include "smt_io_get.h"
 
 static rt_device_t vcom_shell_device = NULL;
 void change_shell(void) 
@@ -28,6 +30,8 @@ void change_shell(void)
 int main(void)
 {
     change_shell();
+    smt_io_init();
+    smt_check_init();
     mb_slave_sample();
 
     return RT_EOK;
