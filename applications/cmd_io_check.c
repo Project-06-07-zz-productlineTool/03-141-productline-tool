@@ -11,7 +11,7 @@ static void io_check(void) {
 
   for (rt_int8_t i = 0; i < IO_NUM; i++) {
     io_num_temp = i + pb0_pin;
-    rt_pin_mode(io_num_temp, PIN_MODE_INPUT);
+    rt_pin_mode(io_num_temp, PIN_MODE_INPUT_PULLDOWN);
     io_value[i] = rt_pin_read(io_num_temp);
     if (io_value[i] != 1) {
       io_check_result = 0;
