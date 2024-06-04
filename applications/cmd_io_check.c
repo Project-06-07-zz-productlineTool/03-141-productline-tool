@@ -13,20 +13,7 @@ static void io_check(void) {
     io_num_temp = i + pb0_pin;
     rt_pin_mode(io_num_temp, PIN_MODE_INPUT_PULLDOWN);
     io_value[i] = rt_pin_read(io_num_temp);
-    if (io_value[i] != 1) {
-      io_check_result = 0;
-    }
-  }
-
-  if (io_check_result == 0) {
-    rt_kprintf("io_check fail!\r\n");
-    for (rt_int8_t i = 0; i < IO_NUM; i++) {
-      if (io_value[i] != 1) {
-        rt_kprintf("PB%d no equal 1\r\n", i);
-      }
-    }
-  } else {
-    rt_kprintf("io_check success\r\n");
+    rt_kprintf("PB%d value is %d\r\n",i,io_value[i]);
   }
 }
 /* 导出到 msh 命令列表中 */
