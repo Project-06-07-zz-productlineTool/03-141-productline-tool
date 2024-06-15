@@ -1,5 +1,10 @@
 [
  {
+  "path": "/packages/iot/at_device", 
+  "ver": "latest", 
+  "name": "AT_DEVICE"
+ }, 
+ {
   "path": "/packages/tools/vconsole", 
   "ver": "latest", 
   "name": "VCONSOLE"
