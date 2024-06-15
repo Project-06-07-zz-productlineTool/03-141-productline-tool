@@ -35,3 +35,9 @@ DebugConfig/
 RTE/
 settings/
 *.uvguix*
+
+# cubemx/*
+cubemx/Drivers/*
+cubemx/EWARM/*
+.settings/language.settings.xml
+cubemx/Src/main.c
