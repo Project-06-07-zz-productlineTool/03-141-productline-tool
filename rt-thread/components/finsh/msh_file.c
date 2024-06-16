@@ -245,7 +245,7 @@ static int cmd_mv(int argc, char **argv)
 
         rt_kprintf("%s => %s\n", argv[1], argv[2]);
 
-        fd = open(argv[2], O_DIRECTORY, 0);
+        fd = open(argv[2], FT_DIRECTORY, 0);
         if (fd >= 0)
         {
             char *src;

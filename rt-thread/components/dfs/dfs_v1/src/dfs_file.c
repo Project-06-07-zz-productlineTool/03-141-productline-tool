@@ -265,7 +265,7 @@ int dfs_file_open(struct dfs_file *fd, const char *path, int flags)
     }
 
     fd->flags |= DFS_F_OPEN;
-    if (flags & O_DIRECTORY)
+    if (flags & FT_DIRECTORY)
     {
         fd->vnode->type = FT_DIRECTORY;
         fd->flags |= DFS_F_DIRECTORY;
@@ -767,7 +767,7 @@ void ls(const char *pathname)
 
     fd_init(&fd);
     /* list directory */
-    if (dfs_file_open(&fd, path, O_DIRECTORY) == 0)
+    if (dfs_file_open(&fd, path, FT_DIRECTORY) == 0)
     {
         rt_kprintf("Directory %s:\n", path);
         do
@@ -919,7 +919,7 @@ static void copydir(const char *src, const char *dst)
     struct stat stat;
     int length;
     struct dfs_file cpfd;
-    if (dfs_file_open(&cpfd, src, O_DIRECTORY) < 0)
+    if (dfs_file_open(&cpfd, src, FT_DIRECTORY) < 0)
     {
         rt_kprintf("open %s failed\n", src);
         return ;

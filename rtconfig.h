@@ -83,6 +83,14 @@
 
 /* DFS: device virtual file system */
 
+#define RT_USING_DFS
+#define DFS_USING_POSIX
+#define DFS_USING_WORKDIR
+#define DFS_FD_MAX 16
+#define RT_USING_DFS_V1
+#define DFS_FILESYSTEMS_MAX 4
+#define DFS_FILESYSTEM_TYPES_MAX 4
+#define RT_USING_DFS_DEVFS
 /* end of DFS: device virtual file system */
 
 /* Device Drivers */
@@ -130,9 +138,16 @@
 
 /* POSIX (Portable Operating System Interface) layer */
 
+#define RT_USING_POSIX_FS
+#define RT_USING_POSIX_DEVIO
+#define RT_USING_POSIX_POLL
+#define RT_USING_POSIX_SELECT
+#define RT_USING_POSIX_SOCKET
 
 /* Interprocess Communication (IPC) */
 
+#define RT_USING_POSIX_PIPE
+#define RT_USING_POSIX_PIPE_SIZE 512
 
 /* Socket is in the 'Network' category */
 
@@ -151,7 +166,7 @@
 
 #define SAL_USING_AT
 /* end of Docking with protocol stacks */
-#define SAL_SOCKETS_NUM 16
+#define SAL_USING_POSIX
 #define RT_USING_NETDEV
 #define NETDEV_USING_IFCONFIG
 #define NETDEV_USING_PING
@@ -170,6 +185,7 @@
 
 /* Utilities */
 
+#define RT_USING_RESOURCE_ID
 /* end of Utilities */
 /* end of RT-Thread Components */
 
@@ -177,6 +193,14 @@
 
 /* IoT - internet of things */
 
+#define PKG_USING_PAHOMQTT
+#define PAHOMQTT_PIPE_MODE
+#define PKG_USING_PAHOMQTT_EXAMPLE
+#define PKG_USING_PAHOMQTT_TEST
+#define RT_PKG_MQTT_THREAD_STACK_SIZE 4096
+#define PKG_PAHOMQTT_SUBSCRIBE_HANDLERS 1
+#define MQTT_DEBUG
+#define PKG_USING_PAHOMQTT_LATEST
 
 /* Wi-Fi */
 
