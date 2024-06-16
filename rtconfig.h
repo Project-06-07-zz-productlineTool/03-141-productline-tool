@@ -83,6 +83,14 @@
 
 /* DFS: device virtual file system */
 
+#define RT_USING_DFS
+#define DFS_USING_POSIX
+#define DFS_USING_WORKDIR
+#define DFS_FD_MAX 16
+#define RT_USING_DFS_V1
+#define DFS_FILESYSTEMS_MAX 4
+#define DFS_FILESYSTEM_TYPES_MAX 4
+#define RT_USING_DFS_DEVFS
 /* end of DFS: device virtual file system */
 
 /* Device Drivers */
@@ -130,9 +138,16 @@
 
 /* POSIX (Portable Operating System Interface) layer */
 
+#define RT_USING_POSIX_FS
+#define RT_USING_POSIX_DEVIO
+#define RT_USING_POSIX_POLL
+#define RT_USING_POSIX_SELECT
+#define RT_USING_POSIX_SOCKET
 
 /* Interprocess Communication (IPC) */
 
+#define RT_USING_POSIX_PIPE
+#define RT_USING_POSIX_PIPE_SIZE 512
 
 /* Socket is in the 'Network' category */
 
@@ -142,8 +157,6 @@
 
 /* Network */
 
-#define RT_USING_LIBC
-
 #define RT_USING_SAL
 #define SAL_INTERNET_CHECK
 
@@ -151,7 +164,7 @@
 
 #define SAL_USING_AT
 /* end of Docking with protocol stacks */
-#define SAL_SOCKETS_NUM 16
+#define SAL_USING_POSIX
 #define RT_USING_NETDEV
 #define NETDEV_USING_IFCONFIG
 #define NETDEV_USING_PING
@@ -170,6 +183,7 @@
 
 /* Utilities */
 
+#define RT_USING_RESOURCE_ID
 /* end of Utilities */
 /* end of RT-Thread Components */
 
@@ -177,6 +191,12 @@
 
 /* IoT - internet of things */
 
+#define PKG_USING_PAHOMQTT
+#define PAHOMQTT_PIPE_MODE
+#define RT_PKG_MQTT_THREAD_STACK_SIZE 4096
+#define PKG_PAHOMQTT_SUBSCRIBE_HANDLERS 1
+#define MQTT_DEBUG
+#define PKG_USING_PAHOMQTT_LATEST
 
 /* Wi-Fi */
 
@@ -204,8 +224,8 @@
 #define AT_DEVICE_USING_ESP8266
 #define AT_DEVICE_ESP8266_SOCKET
 #define AT_DEVICE_ESP8266_SAMPLE
-#define ESP8266_SAMPLE_WIFI_SSID "喵喵喵"
-#define ESP8266_SAMPLE_WIFI_PASSWORD "gf666666"
+#define ESP8266_SAMPLE_WIFI_SSID "rtthread"
+#define ESP8266_SAMPLE_WIFI_PASSWORD "12345678"
 #define ESP8266_SAMPLE_CLIENT_NAME "uart1"
 #define ESP8266_SAMPLE_RECV_BUFF_LEN 512
 #define PKG_USING_AT_DEVICE_LATEST_VERSION
@@ -213,6 +233,15 @@
 
 /* IoT Cloud */
 
+#define PKG_USING_ONENET
+#define PKG_USING_ONENET_SAMPLE
+#define ONENET_USING_MQTT
+#define ONENET_INFO_DEVID "29573339"
+#define ONENET_INFO_AUTH "EF4016D6658466CA3E3606"
+#define ONENET_INFO_APIKEY "a2gVVf1hggZfuATkNogulHK1V=s="
+#define ONENET_INFO_PROID "131494"
+#define ONENET_MASTER_APIKEY "U=wJJ=OEpZsZEHmdPrsKwH2hFYw="
+#define PKG_USING_ONENET_LATEST_VERSION
 /* end of IoT Cloud */
 /* end of IoT - internet of things */
 
@@ -224,6 +253,8 @@
 
 /* JSON: JavaScript Object Notation, a lightweight data-interchange format */
 
+#define PKG_USING_CJSON
+#define PKG_USING_CJSON_V1717
 /* end of JSON: JavaScript Object Notation, a lightweight data-interchange format */
 
 /* XML: Extensible Markup Language */

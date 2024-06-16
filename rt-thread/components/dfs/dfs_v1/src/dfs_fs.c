@@ -274,7 +274,7 @@ int dfs_mount(const char   *device_name,
         struct dfs_file fd;
 
         fd_init(&fd);
-        if (dfs_file_open(&fd, fullpath, O_RDONLY | O_DIRECTORY) < 0)
+        if (dfs_file_open(&fd, fullpath, O_RDONLY | FT_DIRECTORY) < 0)
         {
             rt_free(fullpath);
             rt_set_errno(-ENOTDIR);

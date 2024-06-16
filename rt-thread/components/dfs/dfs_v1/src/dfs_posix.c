@@ -615,7 +615,7 @@ int mkdir(const char *path, mode_t mode)
 
     d = fd_get(fd);
 
-    result = dfs_file_open(d, path, O_DIRECTORY | O_CREAT);
+    result = dfs_file_open(d, path, FT_DIRECTORY | O_CREAT);
 
     if (result < 0)
     {
@@ -680,7 +680,7 @@ DIR *opendir(const char *name)
     }
     d = fd_get(fd);
 
-    result = dfs_file_open(d, name, O_RDONLY | O_DIRECTORY);
+    result = dfs_file_open(d, name, O_RDONLY | FT_DIRECTORY);
     if (result >= 0)
     {
         /* open successfully */
