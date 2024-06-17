@@ -1,3 +1,6 @@
 [submodule "packages/vconsole"]
 	path = packages/vconsole
 	url = https://github.com/enkiller/vconsole.git
+[submodule "packages/pahomqtt-latest"]
+	path = packages/pahomqtt-latest
+	url = https://github.com/vangao-gg/paho-mqtt.git
