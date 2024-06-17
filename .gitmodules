@@ -4,3 +4,6 @@
 [submodule "packages/pahomqtt-latest"]
 	path = packages/pahomqtt-latest
 	url = https://github.com/vangao-gg/paho-mqtt.git
+[submodule "packages/at_device-latest"]
+	path = packages/at_device-latest
+	url = https://github.com/vangao-gg/at_device.git
