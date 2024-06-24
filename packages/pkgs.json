@@ -13,5 +13,10 @@
   "path": "/packages/tools/vconsole", 
   "ver": "latest", 
   "name": "VCONSOLE"
+ }, 
+ {
+  "path": "/packages/peripherals/sensors/ds18b20", 
+  "ver": "latest", 
+  "name": "DS18B20"
  }
 ]

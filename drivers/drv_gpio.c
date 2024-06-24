@@ -278,6 +278,11 @@ static void stm32_pin_mode(rt_device_t dev, rt_base_t pin, rt_base_t mode)
         GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
     }
+    else if(mode == PIN_MODE_OUTPUT_PP)
+    {
+        GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+        GPIO_InitStruct.Pull = GPIO_PULLUP;
+    }
 
     HAL_GPIO_Init(PIN_STPORT(pin), &GPIO_InitStruct);
 }

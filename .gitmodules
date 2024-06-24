@@ -7,3 +7,7 @@
 [submodule "packages/at_device-latest"]
 	path = packages/at_device-latest
 	url = https://github.com/vangao-gg/at_device.git
+[submodule "packages/ds18b20"]
+	path = packages/ds18b20
+	url = https://github.com/vangao-gg/ds18b20.git
+	
