@@ -1,3 +1,9 @@
 [submodule "packages/vconsole"]
 	path = packages/vconsole
 	url = https://github.com/enkiller/vconsole.git
+[submodule "packages/freemodbus-latest"]
+	path = packages/freemodbus-latest
+	url = https://github.com/vangao-gg/freemodbus.git
+[submodule "packages/peripheral_samples-latest"]
+	path = packages/peripheral_samples-latest
+	url = https://github.com/vangao-gg/peripheral-sample.git
