@@ -62,13 +62,12 @@
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.1570350559" name="GNU ARM Cross C Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths.634882052" name="Include paths (-I)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths" useByScannerDiscovery="true" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc://${ProjName}/drivers}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\2_Organizations\8_rtt_study\0_download_again\05_stm32401cc\packages\pahomqtt-latest\samples&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc://${ProjName}//packages/pahomqtt-latest/samples}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc://${ProjName}/drivers//include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc://${ProjName}/drivers//include//config}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc://${ProjName}/libraries//CMSIS//Device//ST//STM32F4xx//Include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc://${ProjName}/libraries//CMSIS//Include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc://${ProjName}/libraries//CMSIS//RTOS//Template}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\2_Organizations\8_rtt_study\0_download_again\05_stm32401cc\packages\ds18b20\inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc://${ProjName}/libraries//STM32F4xx_HAL_Driver//Inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc://${ProjName}/libraries//STM32F4xx_HAL_Driver//Inc//Legacy}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc://${ProjName}/.}&quot;"/>
@@ -692,8 +691,13 @@
 							<option id="ilg.gnuarmeclipse.managedbuild.cross.option.warnings.allwarn.1381561249.119696393" name="Enable all common warnings (-Wall)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.warnings.allwarn.1381561249"/>
 							<option id="ilg.gnuarmeclipse.managedbuild.cross.option.target.other.2041717463.1760618249" name="Other target flags" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.target.other.2041717463"/>
 							<option id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.fpu.unit.1463655269.929407220" name="FPU Type" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.fpu.unit.1463655269"/>
-							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.609196170" name="GNU ARM Cross Assembler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.1810966071"/>
-							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.1687221890" name="GNU ARM Cross C Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.1570350559"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="ilg.gnuarmeclipse.managedbuild.cross.targetPlatform" isAbstract="false" osList="all" superClass="ilg.gnuarmeclipse.managedbuild.cross.targetPlatform"/>
+							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.609196170" name="GNU ARM Cross Assembler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.1810966071">
+								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.1371685899" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
+							</tool>
+							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.1687221890" name="GNU ARM Cross C Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.1570350559">
+								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.1147587385" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
+							</tool>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.1146350624" name="GNU ARM Cross C++ Compiler" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.1302177015"/>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.386904774" name="Cross ARM C Linker" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker.869072473"/>
 							<tool id="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.linker.1853266887" name="GNU ARM Cross C++ Linker" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.linker.1601059928"/>
