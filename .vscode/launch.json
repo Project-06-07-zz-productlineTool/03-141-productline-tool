@@ -1,0 +1,27 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "stm32warship Debug Jlink",
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/Debug/rtthread.elf",        
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "serverpath": "C:/Program Files/SEGGER/JLink_V750/JLinkGDBServerCL",            
+            "servertype": "jlink",
+            "device": "STM32F401RC",
+            "interface": "swd",
+            //"armToolchainPath":"C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2021.10/bin",
+            //"armToolchainPath": "${env:AT32_GCC_PATH}",
+            //"serialNumber": "", //If you have more than one J-Link probe, add the serial number here.
+            //"svdFile": "target/pixhawk/fmu-v2/STM32F427.svd",
+            "armToolchainPath": "${env:RTT_EXEC_PATH}",
+            // "svdFile": "target/neutronrc/f435se/AT32F435xx_v2.svd",
+        }
+
+    ]
+}
