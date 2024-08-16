@@ -14,6 +14,7 @@
 #include "user_mb_app.h"
 #include "smt_adc_get.h"
 #include "smt_io_get.h"
+#include "led_status.h"
 
 #ifdef PKG_MODBUS_SLAVE_SAMPLE
 #define SLAVE_ADDR      MB_SAMPLE_SLAVE_ADDR
@@ -53,6 +54,7 @@ static void send_thread_entry(void *parameter)
         rt_hw_interrupt_enable(level);
 
         rt_thread_mdelay(1000);
+        ledToggle();
     }
 }
 
