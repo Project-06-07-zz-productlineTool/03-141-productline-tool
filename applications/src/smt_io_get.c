@@ -1,7 +1,7 @@
 #include <rtdevice.h>
 #include <rtthread.h>
+#include "smt_io_get.h"
 
-#define IO_NUM 5
 rt_base_t pb0_pin = 0;
 
 void smt_io_init(void) {

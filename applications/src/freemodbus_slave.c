@@ -35,21 +35,20 @@
 extern USHORT usSRegHoldBuf[S_REG_HOLDING_NREGS];
 
 #define SMT_ADC_NUM 6
-#define SMT_IO_NUM 5
 
 static void send_thread_entry(void *parameter)
 {
     USHORT         *usRegHoldingBuf;
     usRegHoldingBuf = usSRegHoldBuf;
     rt_base_t level;
-
+    uint8_t smt_io_num = IO_NUM;
     while (1)
     {
         /* Test Modbus Master */
         level = rt_hw_interrupt_disable();
 
         smt_adc_get(usRegHoldingBuf,SMT_ADC_NUM);
-        smt_io_get(&usRegHoldingBuf[SMT_ADC_NUM],SMT_IO_NUM);
+        smt_io_get(&usRegHoldingBuf[SMT_ADC_NUM],smt_io_num);
 
         rt_hw_interrupt_enable(level);
 
