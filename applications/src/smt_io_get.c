@@ -1,15 +1,22 @@
+#include "smt_io_get.h"
 #include <rtdevice.h>
 #include <rtthread.h>
-#include "smt_io_get.h"
+
+#define TOF2_KEY_NUM 2
 
 rt_base_t pb0_pin = 0;
 
 void smt_io_init(void) {
   pb0_pin = rt_pin_get("PB.0");
   rt_base_t io_num_temp = 0;
-  for (rt_int8_t i = 0; i < IO_NUM; i++) {
+  for (rt_int8_t i = 0; i < IO_NUM - TOF2_KEY_NUM; i++) {
     io_num_temp = i + pb0_pin;
     rt_pin_mode(io_num_temp, PIN_MODE_INPUT);
+  }
+
+  for (rt_int8_t i = IO_NUM - TOF2_KEY_NUM; i < IO_NUM; i++) {
+    io_num_temp = i + pb0_pin;
+    rt_pin_mode(io_num_temp, PIN_MODE_INPUT_PULLUP);
   }
 }
 

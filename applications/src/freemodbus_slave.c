@@ -15,6 +15,7 @@
 #include "smt_adc_get.h"
 #include "smt_io_get.h"
 #include "led_status.h"
+#include "vl53l1_test.h"
 
 #ifdef PKG_MODBUS_SLAVE_SAMPLE
 #define SLAVE_ADDR      MB_SAMPLE_SLAVE_ADDR
@@ -36,6 +37,7 @@
 extern USHORT usSRegHoldBuf[S_REG_HOLDING_NREGS];
 
 #define SMT_ADC_NUM 6
+#define TOF2_NUM (IO_NUM + SMT_ADC_NUM)
 
 static void send_thread_entry(void *parameter)
 {
@@ -50,6 +52,7 @@ static void send_thread_entry(void *parameter)
 
         smt_adc_get(usRegHoldingBuf,SMT_ADC_NUM);
         smt_io_get(&usRegHoldingBuf[SMT_ADC_NUM],smt_io_num);
+        smt_tof2_test(&usRegHoldingBuf[TOF2_NUM]);
 
         rt_hw_interrupt_enable(level);
 

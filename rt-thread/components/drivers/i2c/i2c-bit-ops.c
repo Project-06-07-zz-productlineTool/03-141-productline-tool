@@ -50,9 +50,11 @@ static rt_err_t SCL_H(struct rt_i2c_bit_ops *ops)
         goto done;
 
     start = rt_tick_get();
+    rt_tick_t new_tick = start ;
     while (!GET_SCL(ops))
     {
-        if ((rt_tick_get() - start) > ops->timeout)
+        new_tick++;
+        if (( new_tick - start) > ops->timeout)
             return -RT_ETIMEOUT;
         i2c_delay(ops);
     }
