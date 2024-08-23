@@ -37,28 +37,44 @@
 extern USHORT usSRegHoldBuf[S_REG_HOLDING_NREGS];
 
 #define SMT_ADC_NUM 6
-#define TOF2_NUM (IO_NUM + SMT_ADC_NUM)
 
-static void send_thread_entry(void *parameter)
-{
-    USHORT         *usRegHoldingBuf;
-    usRegHoldingBuf = usSRegHoldBuf;
-    rt_base_t level;
-    uint8_t smt_io_num = IO_NUM;
-    while (1)
-    {
-        /* Test Modbus Master */
-        level = rt_hw_interrupt_disable();
+/*modbus buf index*/
+#define ESC_BOARD_BUF_ADCVALUE_REGIN 0
+#define ESC_BOARD_BUF_IOVALUE_REGIN SMT_ADC_NUM
+#define TOF2_BOARD_BUF_KEYVALUE_BEGIN (SMT_ADC_NUM + ESC_IO_NUM)
+#define TOF2_BOARD_BUF_TOFVALUE_BEGIN (SMT_ADC_NUM + ESC_IO_NUM + TOF2_KEY_NUM)
+#define KEY_BOARD_BUF_KEYVALUE_BEGIN (SMT_ADC_NUM + ESC_IO_NUM + TOF2_KEY_NUM + 1)
 
-        smt_adc_get(usRegHoldingBuf,SMT_ADC_NUM);
-        smt_io_get(&usRegHoldingBuf[SMT_ADC_NUM],smt_io_num);
-        smt_tof2_test(&usRegHoldingBuf[TOF2_NUM]);
+/*io begin and over num*/
+#define ESC_BOARD_IO_GET_BEGIN 0
+#define ESC_BOARD_IO_GET_OVER ESC_IO_NUM
 
-        rt_hw_interrupt_enable(level);
+#define TOF2_BOARD_KEY_GET_BEGIN ESC_IO_NUM
+#define TOF2_BOARD_KEY_GET_OVER (ESC_IO_NUM + TOF2_KEY_NUM)
 
-        rt_thread_mdelay(1000);
-        ledToggle();
-    }
+#define KEY_BOARD_KEY_GET_BEGIN (ESC_IO_NUM + TOF2_KEY_NUM)
+#define KEY_BOARD_KEY_GET_OVER (ESC_IO_NUM + TOF2_KEY_NUM + KEYBOARD_KEY_NUM)
+
+static void send_thread_entry(void *parameter) {
+  USHORT *usRegHoldingBuf;
+  usRegHoldingBuf = usSRegHoldBuf;
+  rt_base_t level;
+
+  while (1) {
+    /* Test Modbus Master */
+    level = rt_hw_interrupt_disable();
+
+    smt_io_get(&usRegHoldingBuf[ESC_BOARD_BUF_IOVALUE_REGIN], ESC_BOARD_IO_GET_BEGIN, ESC_BOARD_IO_GET_OVER);
+    smt_io_get(&usRegHoldingBuf[TOF2_BOARD_BUF_KEYVALUE_BEGIN], TOF2_BOARD_KEY_GET_BEGIN, TOF2_BOARD_KEY_GET_OVER);
+    smt_io_get(&usRegHoldingBuf[KEY_BOARD_BUF_KEYVALUE_BEGIN], KEY_BOARD_KEY_GET_BEGIN, KEY_BOARD_KEY_GET_OVER);
+
+    smt_adc_get(&usRegHoldingBuf[ESC_BOARD_BUF_ADCVALUE_REGIN], SMT_ADC_NUM);    
+    smt_tof2_test(&usRegHoldingBuf[TOF2_BOARD_BUF_TOFVALUE_BEGIN]);
+    
+    rt_hw_interrupt_enable(level);
+    rt_thread_mdelay(1000);
+    ledToggle();
+  }
 }
 
 static void mb_slave_poll(void *parameter)
