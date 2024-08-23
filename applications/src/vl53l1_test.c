@@ -48,15 +48,24 @@ static rt_err_t read_regs(struct rt_i2c_bus_device *bus, rt_uint8_t len, rt_uint
 void smt_tof2_test(rt_uint16_t *result) {
   rt_uint8_t temp[2] = {0, 0};
   rt_uint16_t result_temp;
-  /* 查找I2C总线设备，获取I2C总线设备句柄 */
+  rt_uint8_t temp_retry_result = 0;
+  static rt_uint8_t retry_count = 10;
   i2c_bus = (struct rt_i2c_bus_device *)rt_device_find(VL53l1CB_I2C_BUS_NAME);
+  for (rt_uint8_t i = 0; i < retry_count; i++) {
+    write_reg(i2c_bus, VL53l1CB_ID_REG, 0); /* 发送命令 */
+    read_regs(i2c_bus, 2, temp); /* 获取传感器数据 */
+    result_temp = temp[0] | temp[1] << 8;
+    if (VL53l1CB_ID_RESULT == result_temp) {
+      temp_retry_result = 1;
+    } else {
+      temp_retry_result = 0;
+    }
+    if (temp_retry_result) {
+      break;
+    }
+  }
 
-  write_reg(i2c_bus, VL53l1CB_ID_REG, 0); /* 发送命令 */
-  rt_thread_mdelay(10);
-  read_regs(i2c_bus, 2, temp); /* 获取传感器数据 */
-
-  result_temp = temp[0] | temp[1] << 8;
-  if (VL53l1CB_ID_RESULT == result_temp) {
+  if (temp_retry_result) {
     *result = 1;
   } else {
     *result = 0;
