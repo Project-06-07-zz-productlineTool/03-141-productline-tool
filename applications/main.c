@@ -17,6 +17,7 @@
 #include "smt_adc_get.h"
 #include "smt_io_get.h"
 #include "led_status.h"
+#include "smt_led.h"
 
 static rt_device_t vcom_shell_device = NULL;
 void change_shell(void) 
@@ -35,6 +36,9 @@ int main(void)
     smt_check_init();
     mb_slave_sample();
     ledIoInit();
+    smt_led_board_init();
+    
+    taskSmtLedInit();
 
     return RT_EOK;
 }

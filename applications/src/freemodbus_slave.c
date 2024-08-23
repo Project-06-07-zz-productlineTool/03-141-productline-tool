@@ -16,6 +16,7 @@
 #include "smt_io_get.h"
 #include "led_status.h"
 #include "vl53l1_test.h"
+#include "smt_led.h"
 
 #ifdef PKG_MODBUS_SLAVE_SAMPLE
 #define SLAVE_ADDR      MB_SAMPLE_SLAVE_ADDR
@@ -37,13 +38,15 @@
 extern USHORT usSRegHoldBuf[S_REG_HOLDING_NREGS];
 
 #define SMT_ADC_NUM 6
+#define SMT_TOFVALUE_NUM 1
 
 /*modbus buf index*/
 #define ESC_BOARD_BUF_ADCVALUE_REGIN 0
 #define ESC_BOARD_BUF_IOVALUE_REGIN SMT_ADC_NUM
 #define TOF2_BOARD_BUF_KEYVALUE_BEGIN (SMT_ADC_NUM + ESC_IO_NUM)
 #define TOF2_BOARD_BUF_TOFVALUE_BEGIN (SMT_ADC_NUM + ESC_IO_NUM + TOF2_KEY_NUM)
-#define KEY_BOARD_BUF_KEYVALUE_BEGIN (SMT_ADC_NUM + ESC_IO_NUM + TOF2_KEY_NUM + 1)
+#define KEY_BOARD_BUF_KEYVALUE_BEGIN (SMT_ADC_NUM + ESC_IO_NUM + TOF2_KEY_NUM + SMT_TOFVALUE_NUM)
+#define KEY_BOARD_BUF_LED_BEGIN (SMT_ADC_NUM + ESC_IO_NUM + TOF2_KEY_NUM + SMT_TOFVALUE_NUM + KEYBOARD_KEY_NUM)
 
 /*io begin and over num*/
 #define ESC_BOARD_IO_GET_BEGIN 0
@@ -69,7 +72,8 @@ static void send_thread_entry(void *parameter) {
     smt_io_get(&usRegHoldingBuf[KEY_BOARD_BUF_KEYVALUE_BEGIN], KEY_BOARD_KEY_GET_BEGIN, KEY_BOARD_KEY_GET_OVER);
 
     smt_adc_get(&usRegHoldingBuf[ESC_BOARD_BUF_ADCVALUE_REGIN], SMT_ADC_NUM);    
-    smt_tof2_test(&usRegHoldingBuf[TOF2_BOARD_BUF_TOFVALUE_BEGIN]);
+    // smt_tof2_test(&usRegHoldingBuf[TOF2_BOARD_BUF_TOFVALUE_BEGIN]);
+    smt_led_colour_check(&usRegHoldingBuf[KEY_BOARD_BUF_LED_BEGIN]);
     
     rt_hw_interrupt_enable(level);
     rt_thread_mdelay(1000);
@@ -130,7 +134,7 @@ int mb_slave_sample(void)
         goto __exit;
     }
 
-    tid2 = rt_thread_create("md_s_send", send_thread_entry, RT_NULL, 512, MB_SEND_THREAD_PRIORITY, 10);
+    tid2 = rt_thread_create("md_s_send", send_thread_entry, RT_NULL, 1024, MB_SEND_THREAD_PRIORITY, 10);
     if (tid2 != RT_NULL)
     {
         rt_thread_startup(tid2);
