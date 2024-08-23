@@ -2,16 +2,31 @@
 #include <rtthread.h>
 
 #define TASK_LED_THREAD_PRIORITY RT_THREAD_PRIORITY_MAX - 1
+#define FILTER_TIMES 10
 
 #define GY33_I2C_BUS_NAME "i2c1" /* 传感器连接的I2C总线设备名称 */
 #define GY33_IIC_ADDR 0x5A       /* 从机地址 */
 
-#define GY33_REG_LIGHT_VALUE 0x08
-#define GY33_REG_LIGHT_VALUE_SIZE 4
-#define GY33_REG_COLOUR_VALUE 0x0f
-#define GY33_REG_COLOUR_VALUE_SIZE 1
-#define GY33_REG_RGB_VALUE 0x0c
-#define GY33_REG_RGB_VALUE_SIZE 3
+#define GY33_COLOR_NUM 3
+
+#define GY33_REG_ADDR_ALL 0x00
+#define GY33_REG_ADDR_CONFIG 0x10
+#define GY33_SET_CLIBRATION_CLOSELED 0xA1
+#define GY33_REG_COUNT 16
+
+#define GY33_REG_RAW_RED_H_INDEX 0x00
+#define GY33_REG_RAW_RED_H_INDEX 0x01
+#define GY33_REG_RAW_GREEN_H_INDEX 0x02
+#define GY33_REG_RAW_GREEN_L_INDEX 0x03
+#define GY33_REG_RAW_BULE_H_INDEX 0x04
+#define GY33_REG_RAW_BULE_L_INDEX 0x05
+#define GY33_REG_RAW_CLEAR_H_INDEX 0x06
+#define GY33_REG_RAW_CLEAR_H_INDEX 0x07
+#define GY33_REG_LUX_H_INDEX 0x08
+#define GY33_REG_LUX_L_INDEX 0x09
+#define GY33_REG_CT_H_INDEX 0x0A
+#define GY33_REG_CT_L_INDEX 0x0B
+#define GY33_REG_COLOR_INDEX 0x0E
 
 #define LED_RED "PA.5"
 #define LED_GREEN "PA.6"
@@ -25,7 +40,7 @@ rt_base_t pin_red = 0;
 rt_base_t pin_green = 0;
 rt_base_t pin_blue = 0;
 
-rt_uint16_t rgb_value[GY33_REG_RGB_VALUE_SIZE] = {0};
+rt_uint16_t rgb_value[GY33_COLOR_NUM] = {0};
 
 /* 写传感器寄存器 */
 static rt_err_t set_reg(struct rt_i2c_bus_device *bus, rt_uint8_t reg, rt_uint8_t data) {
@@ -123,13 +138,13 @@ static void led_ctrl(enum LED_COLOUR_e led_colour) {
 }
 
 void smt_led_colour_check(rt_uint16_t *result) {
-  for (rt_uint8_t i = 0; i < GY33_REG_RGB_VALUE_SIZE; i++) {
+  for (rt_uint8_t i = 0; i < GY33_COLOR_NUM; i++) {
     result[i] = rgb_value[i];
   }
 }
 
 static void rgbValueSet(rt_uint16_t *buf_rgb) {
-  for (rt_uint8_t i = 0; i < GY33_REG_RGB_VALUE_SIZE; i++) {
+  for (rt_uint8_t i = 0; i < GY33_COLOR_NUM; i++) {
     rgb_value[i] = buf_rgb[i];
   }
 }
@@ -180,34 +195,26 @@ rt_uint16_t median_filter(rt_uint16_t *data, rt_uint8_t length) {
 void get_colcur_time(rt_uint16_t *buf, rt_uint8_t times) {
   rt_uint8_t buf_temp_all_reg[16] = {0};
   for (rt_uint8_t i = 0; i < times; i++) {
-    write_reg(i2c_bus, 0x00, 0);
-    read_regs(i2c_bus, 16, buf_temp_all_reg);
-    buf[i] = buf_temp_all_reg[0x0a] << 8 | buf_temp_all_reg[0x0b];
+    write_reg(i2c_bus, GY33_REG_ADDR_ALL, 0);
+    read_regs(i2c_bus, GY33_REG_COUNT, buf_temp_all_reg);
+    // buf[i] = buf_temp_all_reg[0x0a] << 8 | buf_temp_all_reg[0x0b];
+    buf[i] = buf_temp_all_reg[GY33_REG_COLOR_INDEX];
     rt_thread_delay(100);
   }
 }
 
-#define FILTER_TIMES 10
-
 static void task_smt_led_entry() {
-  rt_uint8_t temp_light[GY33_REG_LIGHT_VALUE_SIZE] = {0};
-  rt_uint8_t temp_colour[GY33_REG_COLOUR_VALUE_SIZE] = {0};
-  rt_uint8_t temp_rgb[GY33_REG_RGB_VALUE_SIZE] = {0};
   rt_uint16_t led_colcur_temperature[3] = {0};
-  rt_uint16_t led_colcur_stash = 0;
-  rt_uint8_t buf_temp_all_reg[16] = {0};
   rt_uint16_t filter_buf[FILTER_TIMES] = {0};
-
   i2c_bus = (struct rt_i2c_bus_device *)rt_device_find(GY33_I2C_BUS_NAME);
 
   if (i2c_bus == RT_NULL) {
     rt_kprintf("can't find device!\n");
   }
-  rt_uint8_t cmd_calibration_reg = 0x10;
-  rt_uint8_t cmd_calibration_data = 0x31;
+
   led_ctrl(WHITE);
   rt_thread_delay(100);
-  set_reg(i2c_bus, cmd_calibration_reg, 0Xa1); /* 发送命令 */
+  set_reg(i2c_bus, GY33_REG_ADDR_CONFIG, GY33_SET_CLIBRATION_CLOSELED); /* 发送命令 */
   rt_thread_delay(1000);
 
   while (1) {
@@ -224,39 +231,6 @@ static void task_smt_led_entry() {
     led_ctrl(BULE);
     get_colcur_time(filter_buf, FILTER_TIMES);
     led_colcur_temperature[2] = median_filter(filter_buf, FILTER_TIMES);
-    rgbValueSet(led_colcur_temperature);
-  }
-
-  while (1) {
-    led_ctrl(RED);
-    rt_thread_delay(100);
-    write_reg(i2c_bus, 0x00, 0);
-    read_regs(i2c_bus, 16, buf_temp_all_reg);
-    led_colcur_stash = buf_temp_all_reg[0x0a] << 8 | buf_temp_all_reg[0x0b];
-    if (led_colcur_stash < 30000) {
-      led_colcur_temperature[0] = led_colcur_stash;
-    }
-
-    led_ctrl(GREEN);
-    rt_thread_delay(100);
-    write_reg(i2c_bus, 0x00, 0);
-    read_regs(i2c_bus, 16, buf_temp_all_reg);
-    led_colcur_stash = buf_temp_all_reg[0x0a] << 8 | buf_temp_all_reg[0x0b];
-
-    if (led_colcur_stash < 30000) {
-      led_colcur_temperature[1] = led_colcur_stash;
-    }
-
-    led_ctrl(BULE);
-    rt_thread_delay(100);
-    write_reg(i2c_bus, 0x00, 0);
-    read_regs(i2c_bus, 16, buf_temp_all_reg);
-    led_colcur_stash = buf_temp_all_reg[0x0a] << 8 | buf_temp_all_reg[0x0b];
-
-    if (led_colcur_stash < 30000) {
-      led_colcur_temperature[2] = led_colcur_stash;
-    }
-
     rgbValueSet(led_colcur_temperature);
   }
 }
