@@ -1,7 +1,7 @@
 #include <rtdevice.h>
 #include <rtthread.h>
+#include "smt_board.h"
 
-#define TASK_LED_THREAD_PRIORITY RT_THREAD_PRIORITY_MAX - 2
 #define FILTER_TIMES 10
 
 #define GY33_I2C_BUS_NAME "i2c1" /* 传感器连接的I2C总线设备名称 */
@@ -235,7 +235,7 @@ static void task_smt_led_entry() {
   }
 }
 
-void taskSmtLedInit(void) {
+int taskSmtLedInit(void) {
   rt_thread_t tid1 = RT_NULL;
 
   tid1 = rt_thread_create("task_stmled", task_smt_led_entry, NULL, 512, TASK_LED_THREAD_PRIORITY, 10);

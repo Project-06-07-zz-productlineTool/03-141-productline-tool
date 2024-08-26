@@ -12,9 +12,10 @@
 
 #include "mb.h"
 #include "user_mb_app.h"
-#include "smt_adc_get.h"
-#include "smt_io_get.h"
 #include "led_status.h"
+#include "smt_board.h"
+#include "smt_esc_board.h"
+#include "smt_io_get.h"
 #include "smt_vl53l1_id_check.h"
 #include "smt_led_color.h"
 
@@ -31,7 +32,7 @@
 #define PORT_PARITY     MB_PAR_EVEN
 
 #define MB_POLL_THREAD_PRIORITY  10
-#define MB_SEND_THREAD_PRIORITY  RT_THREAD_PRIORITY_MAX - 1
+
 
 #define MB_POLL_CYCLE_MS 200
 
@@ -134,7 +135,7 @@ int mb_slave_sample(void)
         goto __exit;
     }
 
-    tid2 = rt_thread_create("md_s_send", send_thread_entry, RT_NULL, 1024, MB_SEND_THREAD_PRIORITY, 10);
+    tid2 = rt_thread_create("md_s_send", send_thread_entry, RT_NULL, 1024, TASK_SEND_THREAD_PRIORITY, 10);
     if (tid2 != RT_NULL)
     {
         rt_thread_startup(tid2);

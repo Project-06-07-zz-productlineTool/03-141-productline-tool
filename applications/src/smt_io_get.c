@@ -1,9 +1,7 @@
-#include "smt_io_get.h"
-
 #include <rtdevice.h>
 #include <rtthread.h>
-
-#define TASK_IO_POLL_THREAD_PRIORITY RT_THREAD_PRIORITY_MAX - 1
+#include "smt_board.h"
+#include "smt_io_get.h"
 
 rt_base_t pb0_pin = 0;
 rt_uint8_t io_value_cache_[IO_NUM] = {0};
@@ -51,7 +49,7 @@ static void taskSmtIoPollEntry(void) {
   }
 }
 
-void taskSmtIOPollInit(void) {
+int taskSmtIOPollInit(void) {
   rt_thread_t tid1 = RT_NULL;
 
   tid1 = rt_thread_create("taskSmtIoPoll", taskSmtIoPollEntry, NULL, 512, TASK_IO_POLL_THREAD_PRIORITY, 10);
