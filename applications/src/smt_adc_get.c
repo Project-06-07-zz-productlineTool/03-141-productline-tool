@@ -24,7 +24,7 @@
 
 rt_adc_device_t adc_dev_smt;
 
-int smt_check_init(void)
+int smt_adc_init(void)
 {
     rt_err_t ret = RT_EOK;
     /* 查找设备 */

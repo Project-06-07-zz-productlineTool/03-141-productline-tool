@@ -15,8 +15,8 @@
 #include "smt_adc_get.h"
 #include "smt_io_get.h"
 #include "led_status.h"
-#include "vl53l1_test.h"
-#include "smt_led.h"
+#include "smt_vl53l1_id_check.h"
+#include "smt_led_color.h"
 
 #ifdef PKG_MODBUS_SLAVE_SAMPLE
 #define SLAVE_ADDR      MB_SAMPLE_SLAVE_ADDR

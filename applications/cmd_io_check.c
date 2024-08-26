@@ -3,7 +3,6 @@
 #include "smt_io_get.h"
 
 static void io_check(void) {
-  rt_bool_t io_check_result = 1;
   rt_int8_t io_value[IO_NUM] = {0};
   rt_base_t pb0_pin = rt_pin_get("PB.0");
   rt_base_t io_num_temp = pb0_pin;

@@ -28,9 +28,9 @@
 #define GY33_REG_CT_L_INDEX 0x0B
 #define GY33_REG_COLOR_INDEX 0x0E
 
-#define LED_RED "PA.5"
-#define LED_GREEN "PA.6"
-#define LED_BLUE "PA.7"
+#define LED_RED "PA.6"
+#define LED_GREEN "PA.7"
+#define LED_BLUE "PA.8"
 
 enum LED_COLOUR_e { RED, GREEN, BULE, WHITE };
 
