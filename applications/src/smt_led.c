@@ -1,7 +1,7 @@
 #include <rtdevice.h>
 #include <rtthread.h>
 
-#define TASK_LED_THREAD_PRIORITY RT_THREAD_PRIORITY_MAX - 1
+#define TASK_LED_THREAD_PRIORITY RT_THREAD_PRIORITY_MAX - 2
 #define FILTER_TIMES 10
 
 #define GY33_I2C_BUS_NAME "i2c1" /* 传感器连接的I2C总线设备名称 */

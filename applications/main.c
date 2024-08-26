@@ -39,6 +39,7 @@ int main(void)
     smt_led_board_init();
     
     taskSmtLedInit();
+    taskSmtIOPollInit();
 
     return RT_EOK;
 }
