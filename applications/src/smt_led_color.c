@@ -212,11 +212,6 @@ static void task_smt_led_entry() {
     rt_kprintf("can't find device!\n");
   }
 
-  led_ctrl(WHITE);
-  rt_thread_delay(100);
-  set_reg(i2c_bus, GY33_REG_ADDR_CONFIG, GY33_SET_CLIBRATION_CLOSELED); /* 发送命令 */
-  rt_thread_delay(1000);
-
   while (1) {
     led_ctrl(RED);
     get_colcur_time(filter_buf, FILTER_TIMES);
