@@ -29,11 +29,11 @@ void change_shell(void) {
 int bspInit(void) {
   change_shell();
   mb_slave_sample();
-  ledIoInit();
   return RT_EOK;
 }
 
 int taskInit(void) {
+  taskLedStatusInit();
   taskSmtIOPollInit();
   // taskSmtTofInit();
   taskSmtLedInit();

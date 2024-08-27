@@ -78,7 +78,6 @@ static void send_thread_entry(void *parameter) {
     
     rt_hw_interrupt_enable(level);
     rt_thread_mdelay(1000);
-    ledToggle();
   }
 }
 

@@ -3,7 +3,6 @@
 
 #include "rtdef.h"
 
-void ledIoInit(void);
-void ledToggle(void);
 
+int taskLedStatusInit(void);
 #endif
