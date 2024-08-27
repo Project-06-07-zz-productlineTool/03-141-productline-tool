@@ -6,10 +6,8 @@
 #define ESC_IO_NUM 5
 #define TOF2_KEY_NUM 2
 #define KEYBOARD_KEY_NUM 3
-
 #define IO_NUM (ESC_IO_NUM + TOF2_KEY_NUM + KEYBOARD_KEY_NUM)
 
-void smt_io_init(void);
 int smt_io_get(rt_uint16_t *io_data,rt_uint8_t begin_num, rt_uint8_t over_num);
 int taskSmtIOPollInit(void);
 

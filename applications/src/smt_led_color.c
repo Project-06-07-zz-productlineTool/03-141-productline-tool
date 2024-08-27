@@ -102,7 +102,7 @@ static rt_err_t read_regs(struct rt_i2c_bus_device *bus, rt_uint8_t len, rt_uint
   }
 }
 
-void smt_led_board_init(void) {
+static void smt_led_board_init(void) {
   pin_red = rt_pin_get(LED_RED);
   pin_green = rt_pin_get(LED_GREEN);
   pin_blue = rt_pin_get(LED_BLUE);
@@ -237,7 +237,7 @@ static void task_smt_led_entry() {
 
 int taskSmtLedInit(void) {
   rt_thread_t tid1 = RT_NULL;
-
+  smt_led_board_init();
   tid1 = rt_thread_create("task_stmled", task_smt_led_entry, NULL, 512, TASK_LED_THREAD_PRIORITY, 10);
   if (tid1 != RT_NULL) {
     rt_thread_startup(tid1);

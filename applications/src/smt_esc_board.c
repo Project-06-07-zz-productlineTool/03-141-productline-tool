@@ -24,15 +24,15 @@
 #define REFER_VOLTAGE 3300     /* 参考电压 3.3V,数据精度乘以100保留2位小数*/
 #define CONVERT_BITS (1 << 12) /* 转换位数为12位 */
 
-#define PIN_ESC_DRONE_ONOFF "PA.11"
-#define PIN_ESC_SEL_USB "PA.12"
+#define PIN_ESC_DRONE_ONOFF "PB.14"
+#define PIN_ESC_SEL_USB "PB.15"
 
 rt_base_t pin_esc_drone_onoff = 0;
 rt_base_t pin_esc_sel_usb = 0;
-
 rt_adc_device_t adc_dev_smt;
+rt_thread_t tid1 = RT_NULL;
 
-int smt_adc_init(void) {
+static int smt_adc_init(void) {
   rt_err_t ret = RT_EOK;
   /* 查找设备 */
   adc_dev_smt = (rt_adc_device_t)rt_device_find(ADC_DEV_NAME);
@@ -82,13 +82,14 @@ static void taskEscAdcEntry() {
       rt_thread_delay(1000);
       rt_thread_delay(1000);
       rt_pin_write(pin_esc_sel_usb, 1);
+    } else {
+      rt_thread_delete(tid1);
     }
-    rt_thread_delay(1000);
   }
 }
 
 int taskEscAdcInit(void) {
-  rt_thread_t tid1 = RT_NULL;
+  smt_adc_init();
   smtEscIoCtrlInit();
 
   tid1 = rt_thread_create("taskEscAdcCheck", taskEscAdcEntry, NULL, 512, TASK_IO_POLL_THREAD_PRIORITY, 10);

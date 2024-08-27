@@ -6,7 +6,7 @@
 rt_base_t pb0_pin = 0;
 rt_uint8_t io_value_cache_[IO_NUM] = {0};
 
-void smt_io_init(void) {
+static void smtIoGetInit(void) {
   pb0_pin = rt_pin_get("PB.0");
   rt_base_t io_num_temp = 0;
   for (rt_int8_t i = 0; i < ESC_IO_NUM; i++) {
@@ -51,7 +51,7 @@ static void taskSmtIoPollEntry(void) {
 
 int taskSmtIOPollInit(void) {
   rt_thread_t tid1 = RT_NULL;
-
+  smtIoGetInit();
   tid1 = rt_thread_create("taskSmtIoPoll", taskSmtIoPollEntry, NULL, 512, TASK_IO_POLL_THREAD_PRIORITY, 10);
   if (tid1 != RT_NULL) {
     rt_thread_startup(tid1);

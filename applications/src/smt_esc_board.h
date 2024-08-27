@@ -3,7 +3,8 @@
 
 #include "rtdef.h"
 
-int smt_adc_init(void);
+int taskEscAdcInit(void);
 int smt_adc_get(rt_uint16_t *io_data,rt_uint8_t size);
+
 
 #endif 

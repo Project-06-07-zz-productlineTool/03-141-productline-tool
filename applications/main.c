@@ -28,23 +28,21 @@ void change_shell(void) {
 
 int bspInit(void) {
   change_shell();
-  smt_io_init();
-  smt_adc_init();
   mb_slave_sample();
   ledIoInit();
-  smt_led_board_init();
   return RT_EOK;
 }
 
 int taskInit(void) {
-  taskSmtLedInit();
   taskSmtIOPollInit();
+  // taskSmtTofInit();
+  taskSmtLedInit();
+  taskEscAdcInit();
   return RT_EOK;
 }
 
 int main(void) {
   bspInit();
   taskInit();
-
   return RT_EOK;
 }
