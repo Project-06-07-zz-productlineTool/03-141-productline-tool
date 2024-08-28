@@ -28,6 +28,7 @@ void change_shell(void) {
 
 int bspInit(void) {
   change_shell();
+  fal_init();
   mb_slave_sample();
   return RT_EOK;
 }
