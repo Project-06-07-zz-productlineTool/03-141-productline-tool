@@ -25,10 +25,8 @@
 #define CONVERT_BITS (1 << 12) /* 转换位数为12位 */
 
 #define PIN_ESC_DRONE_ONOFF "PB.14"
-#define PIN_ESC_SEL_USB "PB.15"
 
 rt_base_t pin_esc_drone_onoff = 0;
-rt_base_t pin_esc_sel_usb = 0;
 rt_adc_device_t adc_dev_smt;
 rt_thread_t tid1 = RT_NULL;
 
@@ -58,11 +56,8 @@ int smt_adc_get(rt_uint16_t *io_data, rt_uint8_t size) {
 
 static void smtEscIoCtrlInit(void) {
   pin_esc_drone_onoff = rt_pin_get(PIN_ESC_DRONE_ONOFF);
-  pin_esc_sel_usb = rt_pin_get(PIN_ESC_SEL_USB);
   rt_pin_mode(pin_esc_drone_onoff, PIN_MODE_OUTPUT);
-  rt_pin_mode(pin_esc_sel_usb, PIN_MODE_OUTPUT);
   rt_pin_write(pin_esc_drone_onoff, 1);
-  rt_pin_write(pin_esc_sel_usb, 1);
 }
 
 static void taskEscAdcEntry() {
@@ -70,18 +65,12 @@ static void taskEscAdcEntry() {
   while (1) {
     if (!io_control) {
       io_control = 1;
+      rt_thread_delay(1000);
       rt_pin_write(pin_esc_drone_onoff, 0);
       rt_thread_delay(1000);
       rt_thread_delay(1000);
       rt_thread_delay(1000);
       rt_pin_write(pin_esc_drone_onoff, 1);
-      rt_thread_delay(1000);
-      rt_thread_delay(1000);
-      rt_pin_write(pin_esc_sel_usb, 0);
-      rt_thread_delay(1000);
-      rt_thread_delay(1000);
-      rt_thread_delay(1000);
-      rt_pin_write(pin_esc_sel_usb, 1);
     } else {
       rt_thread_delete(tid1);
     }
