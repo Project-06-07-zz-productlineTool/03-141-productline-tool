@@ -41,3 +41,6 @@ cubemx/Drivers/*
 cubemx/EWARM/*
 .settings/language.settings.xml
 cubemx/Src/main.c
+
+# 保留 bootload_exe/03-APPtest 目录下的 .hex 文件  
+!bootload_exe/03-APPtest/*.hex
