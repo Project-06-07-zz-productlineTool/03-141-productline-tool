@@ -233,7 +233,7 @@ static void task_smt_led_entry() {
 int taskSmtLedInit(void) {
   rt_thread_t tid1 = RT_NULL;
   smt_led_board_init();
-  tid1 = rt_thread_create("task_stmled", task_smt_led_entry, NULL, 512, TASK_LED_THREAD_PRIORITY, 10);
+  tid1 = rt_thread_create("KeyBoard", task_smt_led_entry, NULL, 512, TASK_LED_THREAD_PRIORITY, 10);
   if (tid1 != RT_NULL) {
     rt_thread_startup(tid1);
   } else {

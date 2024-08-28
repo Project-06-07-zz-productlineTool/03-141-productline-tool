@@ -52,7 +52,7 @@ static void taskSmtIoPollEntry(void) {
 int taskSmtIOPollInit(void) {
   rt_thread_t tid1 = RT_NULL;
   smtIoGetInit();
-  tid1 = rt_thread_create("taskSmtIoPoll", taskSmtIoPollEntry, NULL, 512, TASK_IO_POLL_THREAD_PRIORITY, 10);
+  tid1 = rt_thread_create("IoPoll", taskSmtIoPollEntry, NULL, 512, TASK_IO_POLL_THREAD_PRIORITY, 10);
   if (tid1 != RT_NULL) {
     rt_thread_startup(tid1);
   } else {

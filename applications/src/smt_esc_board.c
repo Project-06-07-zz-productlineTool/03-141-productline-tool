@@ -92,7 +92,7 @@ int taskEscAdcInit(void) {
   smt_adc_init();
   smtEscIoCtrlInit();
 
-  tid1 = rt_thread_create("taskEscAdcCheck", taskEscAdcEntry, NULL, 512, TASK_IO_POLL_THREAD_PRIORITY, 10);
+  tid1 = rt_thread_create("EscBoard", taskEscAdcEntry, NULL, 512, TASK_IO_POLL_THREAD_PRIORITY, 10);
   if (tid1 != RT_NULL) {
     rt_thread_startup(tid1);
   } else {
